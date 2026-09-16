@@ -23,7 +23,7 @@ export function WindowShell({ children }: { children: ReactNode }) {
       />
 
       {/* Janela do aplicativo */}
-      <div className="relative flex h-[min(88vh,560px)] w-full max-w-md flex-col overflow-hidden rounded-xl border border-white/10 bg-background shadow-[0_40px_120px_-20px_rgba(0,0,0,0.9)] ring-1 ring-black/50">
+      <div className="relative flex max-h-[88vh] w-full max-w-md flex-col overflow-hidden rounded-xl border border-white/10 bg-background shadow-[0_40px_120px_-20px_rgba(0,0,0,0.9)] ring-1 ring-black/50">
         {/* Barra de título estilo Windows 11 */}
         <div className="flex h-10 shrink-0 select-none items-center border-b border-border/60 bg-surface/90 pl-3 backdrop-blur-xl">
           <div className="flex min-w-0 flex-1 items-center gap-2.5">
