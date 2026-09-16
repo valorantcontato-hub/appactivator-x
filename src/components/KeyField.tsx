@@ -49,7 +49,7 @@ export function KeyField({ value, onChange, onSubmit, onCancel, phase }: Props) 
             value={value}
             onChange={(e) => onChange(normalizeKey(e.target.value))}
             placeholder="XXXXX-XXXXX-XXXXX-XXXXX"
-            className="w-full bg-transparent py-4 pl-11 pr-11 font-mono text-base tracking-[0.18em] text-foreground outline-none placeholder:text-muted-foreground/50 disabled:opacity-60"
+            className="w-full bg-transparent py-3 pl-11 pr-11 font-mono text-sm tracking-[0.18em] text-foreground outline-none placeholder:text-muted-foreground/50 disabled:opacity-60"
           />
           {value.length > 0 && (
             <span className="absolute right-4 top-1/2 -translate-y-1/2">
@@ -66,7 +66,7 @@ export function KeyField({ value, onChange, onSubmit, onCancel, phase }: Props) 
           <button
             type="button"
             onClick={onCancel}
-            className="flex items-center justify-center gap-2 rounded-xl border border-border bg-secondary px-8 py-4 font-display text-sm font-semibold uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-secondary/70"
+            className="flex items-center justify-center gap-2 rounded-xl border border-border bg-secondary px-7 py-3 font-display text-xs font-semibold uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-secondary/70"
           >
             <Loader2 className="h-4 w-4 animate-spin" />
             Cancelar
@@ -75,7 +75,7 @@ export function KeyField({ value, onChange, onSubmit, onCancel, phase }: Props) 
           <button
             type="submit"
             disabled={!valid}
-            className="rounded-xl px-10 py-4 font-display text-sm font-semibold uppercase tracking-[0.18em] text-primary-foreground transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 enabled:hover:-translate-y-0.5"
+            className="rounded-xl px-9 py-3 font-display text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 enabled:hover:-translate-y-0.5"
             style={{
               background: "var(--gradient-accent)",
               boxShadow: valid ? "var(--glow-primary)" : undefined,
