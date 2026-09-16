@@ -1,14 +1,23 @@
 import { CheckCircle2, CircleAlert, Loader2, Circle } from "lucide-react";
-import type { ActivationPhase, ActivationProgress } from "@/types";
+import type { ActivationPhase, ActivationProgress, LogLevel } from "@/types";
+import { logMarker } from "@/utils/format";
+
+const MARKER_CLASS: Record<LogLevel, string> = {
+  info: "text-muted-foreground",
+  success: "text-success",
+  warn: "text-warning",
+  error: "text-destructive",
+};
 
 export function ProgressPanel({
   phase,
   progress,
+  message,
 }: {
   phase: ActivationPhase;
   progress: ActivationProgress;
+  message?: string | undefined;
 }) {
-  const running = phase === "running";
   const percent = phase === "success" ? 100 : progress.percent;
 
   return (
@@ -16,14 +25,17 @@ export function ProgressPanel({
       <div className="flex items-center justify-between gap-3 text-xs">
         <div className="flex min-w-0 items-center gap-2">
           <StatusIcon phase={phase} />
-          <span className="truncate font-medium text-foreground">
-            {phase === "idle"
-              ? "Pronto para iniciar"
-              : phase === "success"
-                ? "Ativação concluída"
-                : phase === "error"
-                  ? "Processo interrompido"
-                  : progress.status}
+          <span className="truncate font-mono text-foreground/90">
+            {phase === "idle" ? (
+              "Pronto para iniciar"
+            ) : (
+              <>
+                <span className={MARKER_CLASS[phase === "error" ? "error" : "success"]}>
+                  {logMarker(phase === "error" ? "error" : "success")}{" "}
+                </span>
+                {message ?? progress.status}
+              </>
+            )}
           </span>
         </div>
         <span className="shrink-0 font-mono text-muted-foreground">{percent}%</span>
@@ -44,8 +56,8 @@ export function ProgressPanel({
 }
 
 function StatusIcon({ phase }: { phase: ActivationPhase }) {
-  if (phase === "success") return <CheckCircle2 className="h-4 w-4 text-success" />;
-  if (phase === "error") return <CircleAlert className="h-4 w-4 text-destructive" />;
-  if (phase === "running") return <Loader2 className="h-4 w-4 animate-spin text-primary" />;
-  return <Circle className="h-4 w-4 text-muted-foreground" />;
+  if (phase === "success") return <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />;
+  if (phase === "error") return <CircleAlert className="h-4 w-4 shrink-0 text-destructive" />;
+  if (phase === "running") return <Loader2 className="h-4 w-4 shrink-0 animate-spin text-primary" />;
+  return <Circle className="h-4 w-4 shrink-0 text-muted-foreground" />;
 }

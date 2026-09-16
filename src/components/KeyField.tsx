@@ -86,13 +86,11 @@ export function KeyField({ value, onChange, onSubmit, onCancel, phase }: Props) 
         )}
       </div>
 
-      <p
-        className={`text-xs transition-colors ${showError ? "text-destructive" : "text-muted-foreground"}`}
-      >
-        {showError
-          ? "Formato inválido. A key tem 4 blocos de 5 caracteres."
-          : "A ativação é automática: um único clique executa todas as etapas."}
-      </p>
+      {showError && (
+        <p className="text-xs text-destructive">
+          Formato inválido. A key tem 4 blocos de 5 caracteres.
+        </p>
+      )}
     </form>
   );
 }
