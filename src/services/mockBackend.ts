@@ -85,12 +85,13 @@ export const mockBackend: ActivationBackend = {
     const emit = (level: LogLevel, message: string) => events.onLog(makeLog(level, message));
 
     const advance = (index: number, status: string) => {
-      done += ACTIVATION_STEPS[index].weight;
+      const step = ACTIVATION_STEPS[index]!;
+      done += step.weight;
       const percent = Math.min(100, Math.round((done / TOTAL_WEIGHT) * 100));
       const elapsed = (Date.now() - started) / 1000;
       const eta = percent > 0 ? (elapsed / percent) * (100 - percent) : 20;
       events.onProgress({
-        step: ACTIVATION_STEPS[index].id,
+        step: step.id,
         stepIndex: index,
         totalSteps: ACTIVATION_STEPS.length,
         percent,
