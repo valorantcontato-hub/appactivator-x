@@ -16,7 +16,7 @@ export function ProgressPanel({
 }: {
   phase: ActivationPhase;
   progress: ActivationProgress;
-  message?: string;
+  message?: string | undefined;
 }) {
   const percent = phase === "success" ? 100 : progress.percent;
 
