@@ -28,7 +28,7 @@ export function LogConsole({ logs, running }: { logs: LogEntry[]; running: boole
   };
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-border/70 bg-surface/70 backdrop-blur-xl">
+    <section className="overflow-hidden rounded-xl border border-border/70 bg-surface/70 backdrop-blur-xl">
       <header className="flex items-center justify-between border-b border-border/70 px-4 py-3">
         <div className="flex items-center gap-2">
           <Terminal className="h-4 w-4 text-primary" />
@@ -50,7 +50,7 @@ export function LogConsole({ logs, running }: { logs: LogEntry[]; running: boole
         </button>
       </header>
 
-      <div className="h-64 overflow-y-auto px-4 py-3 font-mono text-[13px] leading-relaxed">
+      <div className="h-36 overflow-y-auto px-4 py-2.5 font-mono text-xs leading-relaxed">
         {logs.length === 0 ? (
           <p className="text-muted-foreground/60">
             Aguardando início do processo. Insira sua key e clique em ATIVAR.

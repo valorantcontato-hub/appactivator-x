@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ShieldCheck, Gamepad2, HardDrive } from "lucide-react";
+import { HardDrive } from "lucide-react";
 import { WindowShell } from "@/components/WindowShell";
 import { KeyField } from "@/components/KeyField";
 import { LogConsole } from "@/components/LogConsole";
@@ -38,33 +38,23 @@ function Index() {
 
   return (
     <WindowShell>
-      <div className="space-y-5">
-        <section className="rounded-2xl border border-border/70 bg-surface/70 p-6 backdrop-blur-xl duration-500 animate-in fade-in slide-in-from-bottom-2">
-          <div className="mb-6 flex flex-wrap items-center gap-2 text-[11px] text-muted-foreground">
-            <Badge
-              icon={<HardDrive className="h-3 w-3" />}
-              tone={info?.found ? "ok" : "warn"}
-              label={info?.found ? "Steam detectada" : "Steam não localizada"}
-            />
-            <Badge
-              icon={<ShieldCheck className="h-3 w-3" />}
-              tone="ok"
-              label="Processo 100% interno"
-            />
-            <Badge
-              icon={<Gamepad2 className="h-3 w-3" />}
-              tone="neutral"
-              label="AppID automático"
-            />
+      <div className="space-y-4">
+        <section className="rounded-xl border border-border/70 bg-surface/70 p-4 backdrop-blur-xl duration-500 animate-in fade-in slide-in-from-bottom-2">
+          <div className="mb-3 flex items-center justify-between">
+            <h1 className="font-display text-base font-semibold tracking-tight text-foreground">
+              Ativação em um clique
+            </h1>
+            <span
+              className={`flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium ${
+                info?.found
+                  ? "border-success/30 bg-success/10 text-success"
+                  : "border-warning/30 bg-warning/10 text-warning"
+              }`}
+            >
+              <HardDrive className="h-3 w-3" />
+              {info?.found ? "Steam detectada" : "Steam não localizada"}
+            </span>
           </div>
-
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-foreground">
-            Ativação em um clique
-          </h1>
-          <p className="mb-6 mt-1 max-w-xl text-sm text-muted-foreground">
-            Insira sua key de ativação. O aplicativo executa todas as etapas automaticamente,
-            identifica o AppID do jogo e aplica as correções necessárias.
-          </p>
 
           <KeyField
             value={key}
@@ -84,27 +74,3 @@ function Index() {
   );
 }
 
-function Badge({
-  icon,
-  label,
-  tone,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  tone: "ok" | "warn" | "neutral";
-}) {
-  const toneClass =
-    tone === "ok"
-      ? "border-success/30 bg-success/10 text-success"
-      : tone === "warn"
-        ? "border-warning/30 bg-warning/10 text-warning"
-        : "border-border bg-surface-2 text-muted-foreground";
-  return (
-    <span
-      className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-medium ${toneClass}`}
-    >
-      {icon}
-      {label}
-    </span>
-  );
-}
