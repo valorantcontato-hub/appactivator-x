@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ShieldCheck, Gamepad2, HardDrive } from "lucide-react";
+import { HardDrive } from "lucide-react";
 import { WindowShell } from "@/components/WindowShell";
 import { KeyField } from "@/components/KeyField";
 import { LogConsole } from "@/components/LogConsole";
