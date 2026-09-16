@@ -4,10 +4,15 @@ export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <div className="flex items-center gap-3">
       <div
-        className="relative flex h-10 w-10 items-center justify-center rounded-xl"
+        className={`relative flex items-center justify-center ${
+          compact ? "h-5 w-5 rounded-md" : "h-10 w-10 rounded-xl"
+        }`}
         style={{ background: "var(--gradient-accent)", boxShadow: "var(--glow-primary)" }}
       >
-        <Zap className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
+        <Zap
+          className={compact ? "h-3 w-3 text-primary-foreground" : "h-5 w-5 text-primary-foreground"}
+          strokeWidth={2.5}
+        />
       </div>
       {!compact && (
         <div className="leading-tight">
