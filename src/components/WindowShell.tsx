@@ -50,22 +50,6 @@ export function WindowShell({ children }: { children: ReactNode }) {
         {/* Conteúdo da janela */}
         <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden">
           <div className="relative mx-auto flex w-full flex-1 flex-col px-4 py-4">
-            <header className="flex items-center gap-3 rounded-xl border border-border/70 bg-surface/80 px-3 py-2.5 backdrop-blur-xl">
-              <img
-                src={logoMogg.url}
-                alt="Logo MOGG"
-                className="h-9 w-9 rounded-full ring-1 ring-white/15"
-              />
-              <div className="min-w-0">
-                <p className="font-display text-sm font-semibold leading-tight tracking-tight text-foreground">
-                  MOGG
-                </p>
-                <p className="truncate text-[11px] leading-tight text-muted-foreground">
-                  Ministry of Games &amp; Gifts
-                </p>
-              </div>
-            </header>
-
             <main className="min-h-0 flex-1 overflow-hidden py-4">{children}</main>
           </div>
         </div>
