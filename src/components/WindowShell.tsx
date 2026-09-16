@@ -35,7 +35,7 @@ export function WindowShell({ children }: { children: ReactNode }) {
       />
 
       {/* Janela do aplicativo */}
-      <div className="relative flex h-[min(92vh,860px)] w-full max-w-4xl flex-col overflow-hidden rounded-xl border border-white/10 bg-background shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85)] ring-1 ring-black/40">
+      <div className="relative flex h-[min(88vh,620px)] w-full max-w-xl flex-col overflow-hidden rounded-xl border border-white/10 bg-background shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85)] ring-1 ring-black/40">
         {/* Barra de título estilo Windows 11 */}
         <div className="flex h-11 shrink-0 select-none items-center border-b border-border/60 bg-surface/90 pl-4 backdrop-blur-xl">
           <div className="flex min-w-0 flex-1 items-center gap-2.5">
@@ -70,9 +70,12 @@ export function WindowShell({ children }: { children: ReactNode }) {
             }}
           />
 
-          <div className="relative mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-5 sm:px-6">
-            <header className="flex items-center justify-between rounded-2xl border border-border/70 bg-surface/80 px-4 py-3 backdrop-blur-xl">
-              <Logo />
+          <div className="relative mx-auto flex w-full flex-1 flex-col px-4 py-4">
+            <header className="flex items-center justify-between rounded-xl border border-border/70 bg-surface/80 px-3 py-2 backdrop-blur-xl">
+              <Logo compact />
+              <span className="font-display text-sm font-semibold tracking-tight text-foreground">
+                NEXUS<span className="text-primary">ACTIVATE</span>
+              </span>
 
               <nav className="flex items-center gap-1">
                 <NavButton to="/" active={pathname === "/"} icon={<Home className="h-4 w-4" />}>
@@ -88,12 +91,7 @@ export function WindowShell({ children }: { children: ReactNode }) {
               </nav>
             </header>
 
-            <main className="flex-1 py-5">{children}</main>
-
-            <footer className="flex items-center justify-between border-t border-border/60 pt-3 text-[11px] text-muted-foreground">
-              <span>© 2026 Nexus Activate</span>
-              <span className="font-mono">Windows x64 · build local</span>
-            </footer>
+            <main className="min-h-0 flex-1 overflow-y-auto py-4">{children}</main>
           </div>
         </div>
       </div>
