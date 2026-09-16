@@ -1,4 +1,5 @@
 import { KeyRound, Loader2, Check, X } from "lucide-react";
+import { SteamIcon } from "@/components/SteamIcon";
 import { normalizeKey, isKeyFormatValid } from "@/utils/validation";
 import type { ActivationPhase } from "@/types";
 
@@ -75,12 +76,17 @@ export function KeyField({ value, onChange, onSubmit, onCancel, phase }: Props) 
           <button
             type="submit"
             disabled={!valid}
-            className="rounded-xl px-9 py-3 font-display text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 enabled:hover:-translate-y-0.5"
+            className="flex items-center justify-center gap-2 rounded-xl px-7 py-3 font-display text-xs font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 enabled:hover:-translate-y-0.5"
             style={{
-              background: "var(--gradient-accent)",
-              boxShadow: valid ? "var(--glow-primary)" : undefined,
+              background: valid
+                ? "linear-gradient(135deg, #1b2838 0%, #2a475e 55%, #66c0f4 140%)"
+                : "linear-gradient(135deg, #1b2838 0%, #2a475e 100%)",
+              boxShadow: valid
+                ? "0 10px 30px -8px rgba(102, 192, 244, 0.45)"
+                : undefined,
             }}
           >
+            <SteamIcon className="h-4 w-4" />
             Ativar
           </button>
         )}
