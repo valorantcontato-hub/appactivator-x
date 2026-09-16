@@ -52,14 +52,13 @@ export function ProgressPanel({
 
       <ol className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {ACTIVATION_STEPS.map((step, index) => {
-          const done = phase === "success" || index < progress.stepIndex + (running ? 0 : 0);
           const isCurrent = running && index === progress.stepIndex;
           const completed = phase === "success" || (percent > 0 && index < progress.stepIndex);
           return (
             <li
               key={step.id}
               className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs transition-all duration-300 ${
-                completed || done
+                completed
                   ? "border-success/30 bg-success/5 text-foreground"
                   : isCurrent
                     ? "border-primary/40 bg-primary/5 text-foreground"
