@@ -32,7 +32,9 @@ export function WindowShell({ children }: { children: ReactNode }) {
               alt="MOGG"
               className="h-5 w-5 rounded-full ring-1 ring-white/15"
             />
-            <span className="truncate text-xs font-medium text-muted-foreground">MOGG</span>
+            <span className="truncate text-xs font-medium text-muted-foreground">
+              MOGG <span className="text-muted-foreground/70">— Ministry of Games & Gifts</span>
+            </span>
           </div>
           <div className="flex h-full items-stretch">
             <TitleBarButton label="Minimizar">
