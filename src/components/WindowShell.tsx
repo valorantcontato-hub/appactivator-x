@@ -1,60 +1,126 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Minus, Settings, Square, X, Home } from "lucide-react";
+import { Minus, Settings, X, Home, Copy } from "lucide-react";
 import type { ReactNode } from "react";
 import { Logo } from "./Logo";
 
+/**
+ * Simula o visual final do aplicativo desktop:
+ * uma janela do Windows flutuando sobre a área de trabalho.
+ * No .exe real (Tauri), a barra de título nativa assume esse papel.
+ */
 export function WindowShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#101014] p-4 text-foreground sm:p-8">
+      {/* "Desktop" backdrop */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full opacity-25 blur-[120px]"
+        className="pointer-events-none absolute -top-48 left-1/3 h-[560px] w-[900px] -translate-x-1/2 rounded-full opacity-20 blur-[140px]"
         style={{ background: "var(--gradient-accent)" }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.15]"
+        className="pointer-events-none absolute -bottom-56 right-0 h-[480px] w-[720px] rounded-full opacity-10 blur-[160px]"
+        style={{ background: "var(--gradient-accent)" }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
             "linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
-          maskImage: "radial-gradient(ellipse at 50% 0%, black, transparent 75%)",
         }}
       />
 
-      <div className="relative mx-auto flex min-h-screen w-full max-w-5xl flex-col px-4 py-6 sm:px-6">
-        <header className="flex items-center justify-between rounded-2xl border border-border/70 bg-surface/80 px-4 py-3 backdrop-blur-xl">
-          <Logo />
-
-          <div className="flex items-center gap-1">
-            <NavButton to="/" active={pathname === "/"} icon={<Home className="h-4 w-4" />}>
-              Início
-            </NavButton>
-            <NavButton
-              to="/configuracoes"
-              active={pathname.startsWith("/configuracoes")}
-              icon={<Settings className="h-4 w-4" />}
-            >
-              Configurações
-            </NavButton>
-            <div className="ml-2 hidden items-center gap-1 border-l border-border/70 pl-2 sm:flex">
-              <WindowDot icon={<Minus className="h-3 w-3" />} label="Minimizar" />
-              <WindowDot icon={<Square className="h-2.5 w-2.5" />} label="Maximizar" />
-              <WindowDot icon={<X className="h-3 w-3" />} label="Fechar" danger />
-            </div>
+      {/* Janela do aplicativo */}
+      <div className="relative flex h-[min(92vh,860px)] w-full max-w-4xl flex-col overflow-hidden rounded-xl border border-white/10 bg-background shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85)] ring-1 ring-black/40">
+        {/* Barra de título estilo Windows 11 */}
+        <div className="flex h-11 shrink-0 select-none items-center border-b border-border/60 bg-surface/90 pl-4 backdrop-blur-xl">
+          <div className="flex min-w-0 flex-1 items-center gap-2.5">
+            <Logo compact />
+            <span className="truncate text-xs font-medium text-muted-foreground">
+              Nexus Activate
+            </span>
           </div>
-        </header>
+          <div className="flex h-full items-stretch">
+            <TitleBarButton label="Minimizar">
+              <Minus className="h-4 w-4" strokeWidth={1.5} />
+            </TitleBarButton>
+            <TitleBarButton label="Maximizar">
+              <Copy className="h-3.5 w-3.5 rotate-90" strokeWidth={1.5} />
+            </TitleBarButton>
+            <TitleBarButton label="Fechar" danger>
+              <X className="h-4 w-4" strokeWidth={1.5} />
+            </TitleBarButton>
+          </div>
+        </div>
 
-        <main className="flex-1 py-6">{children}</main>
+        {/* Conteúdo da janela */}
+        <div className="relative flex min-h-0 flex-1 flex-col overflow-y-auto">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-[0.12]"
+            style={{
+              backgroundImage:
+                "linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)",
+              backgroundSize: "56px 56px",
+              maskImage: "radial-gradient(ellipse at 50% 0%, black, transparent 75%)",
+            }}
+          />
 
-        <footer className="flex items-center justify-between border-t border-border/60 pt-3 text-[11px] text-muted-foreground">
-          <span>© 2026 Nexus Activate</span>
-          <span className="font-mono">Windows x64 · build local</span>
-        </footer>
+          <div className="relative mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-5 sm:px-6">
+            <header className="flex items-center justify-between rounded-2xl border border-border/70 bg-surface/80 px-4 py-3 backdrop-blur-xl">
+              <Logo />
+
+              <nav className="flex items-center gap-1">
+                <NavButton to="/" active={pathname === "/"} icon={<Home className="h-4 w-4" />}>
+                  Início
+                </NavButton>
+                <NavButton
+                  to="/configuracoes"
+                  active={pathname.startsWith("/configuracoes")}
+                  icon={<Settings className="h-4 w-4" />}
+                >
+                  Configurações
+                </NavButton>
+              </nav>
+            </header>
+
+            <main className="flex-1 py-5">{children}</main>
+
+            <footer className="flex items-center justify-between border-t border-border/60 pt-3 text-[11px] text-muted-foreground">
+              <span>© 2026 Nexus Activate</span>
+              <span className="font-mono">Windows x64 · build local</span>
+            </footer>
+          </div>
+        </div>
       </div>
     </div>
+  );
+}
+
+function TitleBarButton({
+  label,
+  danger = false,
+  children,
+}: {
+  label: string;
+  danger?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      className={`flex h-full w-11 items-center justify-center text-muted-foreground transition-colors ${
+        danger ? "hover:bg-destructive hover:text-white" : "hover:bg-secondary hover:text-foreground"
+      }`}
+    >
+      {children}
+    </button>
   );
 }
 
@@ -81,28 +147,5 @@ function NavButton({
       {icon}
       <span className="hidden sm:inline">{children}</span>
     </Link>
-  );
-}
-
-function WindowDot({
-  icon,
-  label,
-  danger = false,
-}: {
-  icon: ReactNode;
-  label: string;
-  danger?: boolean;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      title={label}
-      className={`flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors ${
-        danger ? "hover:bg-destructive hover:text-destructive-foreground" : "hover:bg-secondary"
-      }`}
-    >
-      {icon}
-    </button>
   );
 }
