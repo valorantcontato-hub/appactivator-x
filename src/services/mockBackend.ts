@@ -122,7 +122,7 @@ export const mockBackend: ActivationBackend = {
 
       emit("info", "Identificando AppID do jogo ativado...");
       await wait(1200, signal);
-      const picked = CATALOG[Math.floor(Math.random() * CATALOG.length)];
+      const picked = CATALOG[Math.floor(Math.random() * CATALOG.length)]!;
       appId = picked.appId;
       gameName = picked.name;
       emit("success", `AppID encontrado: ${appId} — ${gameName}`);
