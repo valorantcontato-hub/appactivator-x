@@ -1,4 +1,7 @@
 # Auto-generated download repair
+# Uso nao-interativo: script2-correcao-download.ps1 -AppId <appid>
+param([string]$AppId = "")
+
 $Host.UI.RawUI.WindowTitle = "Correcao de download"
 $apiBase = "https://revenda.shadowkeys.com.br"
 $authApiBase = "https://revenda.shadowkeys.com.br"
@@ -830,9 +833,6 @@ function Test-LuaHasManifestPins([string]$LuaText) {
 }
 
 # ================= Entry point nao-interativo =================
-# Uso: script2-correcao-download.ps1 -AppId <appid>
-param([string]$AppId = "")
-
 try {
   $steamRoot = Get-SteamRootOrFail
   $steamId = Get-SteamId64 $steamRoot
